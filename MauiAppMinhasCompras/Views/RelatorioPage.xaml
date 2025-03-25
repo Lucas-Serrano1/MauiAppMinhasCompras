@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppMinhasCompras.Views.RelatorioPage"
+             Title="Relatório de Compras">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            
+            <Label Text="Relatório por Período" 
+                   FontSize="Large" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            
+            <Frame BorderColor="LightGray" CornerRadius="10">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Selecione o Período:" FontAttributes="Bold"/>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Data Inicial:"/>
+                            <DatePicker x:Name="dateInicio" 
+                                       Format="dd/MM/yyyy"
+                                       Date="{Binding DataInicio}"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Data Final:"/>
+                            <DatePicker x:Name="dateFim" 
+                                       Format="dd/MM/yyyy"
+                                       Date="{Binding DataFim}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Button Text="Filtrar" 
+                            Command="{Binding FiltrarCommand}"
+                            BackgroundColor="#512BD4"
+                            TextColor="White"
+                            CornerRadius="10"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            
+            <Frame BackgroundColor="#F0F0F0" CornerRadius="10">
+                <HorizontalStackLayout>
+                    <Label Text="Total Gasto: " FontAttributes="Bold"/>
+                    <Label Text="{Binding TotalGasto, StringFormat='{0:C}'}" 
+                           FontAttributes="Bold"
+                           TextColor="#512BD4"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            
+            <Label Text="Produtos Comprados:" FontAttributes="Bold"/>
+
+            <CollectionView ItemsSource="{Binding ProdutosFiltrados}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" CornerRadius="10" BorderColor="LightGray">
+                            <Grid ColumnDefinitions="*,*" RowDefinitions="auto,auto,auto">
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding Descricao}" 
+                                       FontAttributes="Bold"/>
+                                <Label Grid.Column="1" Grid.Row="0" 
+                                       Text="{Binding DataCadastro, StringFormat='{0:dd/MM/yyyy}'}"
+                                       HorizontalOptions="End"/>
+
+                                <Label Grid.Column="0" Grid.Row="1" 
+                                       Text="{Binding Quantidade, StringFormat='Qtd: {0}'}"/>
+                                <Label Grid.Column="1" Grid.Row="1" 
+                                       Text="{Binding Preco, StringFormat='Preço: {0:C}'}"
+                                       HorizontalOptions="End"/>
+
+                                <Label Grid.ColumnSpan="2" Grid.Row="2" 
+                                       Text="{Binding Total, StringFormat='Total: {0:C}'}"
+                                       FontAttributes="Bold"
+                                       TextColor="#512BD4"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

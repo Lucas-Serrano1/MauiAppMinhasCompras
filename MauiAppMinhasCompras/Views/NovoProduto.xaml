@@ -17,5 +17,11 @@
 
         <Label Text="Preço Unitário:" />
         <Entry x:Name="txt_preco" Keyboard="Numeric" />
+
+        
+        <Label Text="Data de Compra:" />
+        <DatePicker x:Name="datePicker_data" 
+                    Date="{Binding Source={x:Reference datePicker_data}, Path=Date}"
+                    Format="dd/MM/yyyy" />
     </VerticalStackLayout>
 </ContentPage>

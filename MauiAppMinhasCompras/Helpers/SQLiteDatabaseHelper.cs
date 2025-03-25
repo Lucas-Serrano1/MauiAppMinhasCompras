@@ -43,5 +43,29 @@ namespace MauiAppMinhasCompras.Helpers
 
             return _conn.QueryAsync<Produto>(sql);
         }
+
+        
+        public async Task<List<Produto>> GetByDateRange(DateTime startDate, DateTime endDate)
+        {
+            endDate = endDate.Date.AddDays(1).AddSeconds(-1);
+
+            return await _conn.Table<Produto>()
+                .Where(p => p.DataCadastro >= startDate.Date &&
+                           p.DataCadastro <= endDate)
+                .OrderByDescending(p => p.DataCadastro)
+                .ToListAsync();
+        }
+
+        public async Task<double> GetTotalSpentByDateRange(DateTime startDate, DateTime endDate)
+        {
+            endDate = endDate.Date.AddDays(1).AddSeconds(-1);
+
+            var produtos = await _conn.Table<Produto>()
+                                   .Where(p => p.DataCadastro >= startDate.Date &&
+                                              p.DataCadastro <= endDate)
+                                   .ToListAsync();
+
+            return produtos.Sum(p => p.Total);
+        }
     }
 }

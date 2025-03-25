@@ -5,8 +5,10 @@
              Title="Minhas Compras">
 
     <ContentPage.ToolbarItems>
+        
         <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1" />
         <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Relatório" Clicked="OnRelatorioClicked" IconImageSource="chart.png" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -17,6 +19,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    
     <StackLayout>
         <SearchBar x:Name="txt_search"
                    Margin="-15, 0, 0, 0"
@@ -56,6 +59,5 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Frame>
-
     </StackLayout>
 </ContentPage>
